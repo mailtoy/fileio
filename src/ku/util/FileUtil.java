@@ -1,10 +1,12 @@
 package ku.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 /**
@@ -72,7 +74,7 @@ public class FileUtil {
 	 * InputSteam and PrintWriter to write the OutputSteam and read line by line at
 	 * a time.
 	 * 
-	 * @param in is the Object of InputStream.
+	 * @param in is the Object of InputStream to be read.
 	 * @param out is the Object of OutputSteam to be write.
 	 */
 	static void bcopy(InputStream in, OutputStream out) {
@@ -95,4 +97,32 @@ public class FileUtil {
 						}
 					}
 		}
+	
+	/**
+	 * Read and write using by BufferReader and BufferWriter with an array of char.
+	 * @param in is the Object of InputStream to be read.
+	 * @param out is the Object of OutputSteam to be write.
+	 * @param blocksize is the size of char array.
+	 */
+	public static void charcopy(InputStream in, OutputStream out, int blocksize) {
+		
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+			char[] buffer = new char[blocksize];
+			int index;
+			try {
+				while ((index = reader.read(buffer)) != -1) {
+					writer.write(buffer, 0, index);
+				}
+				} catch (IOException e) {
+					throw new RuntimeException();
+					} finally {
+						try {
+							reader.close();
+							writer.close();
+							} catch (IOException e) {
+								
+							}
+						}
+			}
 }
