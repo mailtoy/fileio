@@ -188,7 +188,7 @@ public class FileCopyTask implements Runnable {
 			}
 		};
 		
-		int charSize = 1;
+		int charSize = 1024;
 		FileCopyTask task6 = new FileCopyTask(inputFilename, outputFilename) {
 			public void run() {
 				FileUtil.charcopy(in, out, charSize);
