@@ -30,8 +30,8 @@ public class FileUtil {
 			while ((word = in.read()) != -1) {
 				out.write(word);
 				}
-			} catch (Exception e) {
-				throw new RuntimeException();
+			} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
 				} finally {
 					try {
 						in.close();
@@ -58,7 +58,7 @@ public class FileUtil {
 				out.write(buffer);
 				}
 			} catch (IOException e) {
-				throw new RuntimeException();
+				throw new RuntimeException(e.getMessage(), e);
 				} finally {
 					try {
 						in.close();
@@ -87,7 +87,7 @@ public class FileUtil {
 				printWriter.write(text);
 				}
 			} catch (IOException e) {
-				throw new RuntimeException();
+				throw new RuntimeException(e.getMessage(), e);
 				} finally {
 					try {
 						in.close();
@@ -115,7 +115,7 @@ public class FileUtil {
 					writer.write(buffer, 0, index);
 				}
 				} catch (IOException e) {
-					throw new RuntimeException();
+					throw new RuntimeException(e.getMessage(), e);
 					} finally {
 						try {
 							reader.close();
